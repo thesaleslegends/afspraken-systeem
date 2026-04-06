@@ -1,3 +1,5 @@
+
+
 import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm'
 
 // 🔑 Supabase
@@ -72,11 +74,8 @@ function getEnd(start, duur){
 // 🔥 STRAAT AUTO
 // =========================
 
-async function haalStraatOp() {
-  const postcode = document.getElementById("postcode").value.replace(/\s/g, "").toUpperCase();
-  const huisnummer = document.getElementById("huisnummer").value;
-
-  if(!postcode || !huisnummer) return;
+async function haalAdresOp(postcode, huisnummer) {
+  if (!postcode || !huisnummer) return null;
 
   try {
     const res = await fetch(`https://api.pdok.nl/bzk/locatieserver/search/v3_1/free?q=${postcode}+${huisnummer}`);
@@ -84,14 +83,18 @@ async function haalStraatOp() {
 
     const doc = data.response.docs[0];
 
-    if(doc){
-      document.getElementById("straatnaam").value = doc.straatnaam || "";
+    if (doc) {
+      return {
+        straat: doc.straatnaam || "",
+        plaats: doc.woonplaatsnaam || ""
+      };
     }
   } catch (err) {
     console.error("Adres fout:", err);
   }
-}
 
+  return null;
+}
 document.getElementById("postcode").addEventListener("blur", haalStraatOp);
 document.getElementById("huisnummer").addEventListener("blur", haalStraatOp);
 
