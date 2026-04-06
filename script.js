@@ -1,7 +1,7 @@
-import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm'
+
 
 // 🔑 Supabase
-const supabase = createClient(
+const supabase = supabase.createClient(
   "https://lgpydcsolgbqiuplvjsc.supabase.co",
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxncHlkY3NvbGdicWl1cGx2anNjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM5NDE0ODgsImV4cCI6MjA4OTUxNzQ4OH0.bmCbu6fjAixqCMwBbms2tAXHpzJOccz57_RrAKjovTQ"
 );
