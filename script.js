@@ -100,7 +100,6 @@ async function haalAdresOp(postcode, huisnummer) {
   }
 }
 
-// 👉 events
 const postcodeInput = document.getElementById("postcode");
 const huisnummerInput = document.getElementById("huisnummer");
 
@@ -115,7 +114,7 @@ if (postcodeInput && huisnummerInput) {
 }
 
 // =========================
-// 🔥 TIJDSLOTEN (ALLEEN DIT IS AANGEPAST)
+// 🔥 TIJDSLOTEN
 // =========================
 
 async function genereerTijdsloten(){
@@ -143,7 +142,7 @@ async function genereerTijdsloten(){
   const bookedBlocks = (data || [])
     .filter(a => 
       normalizeDate(a.datum) === gekozenDatum &&
-      ["gekwalificeerd", "voicemail"].includes((a.status || "").toLowerCase())
+      ["gekwalificeerd", "voicemail"].includes(a.status) // 🔥 ENIGE AANPASSING
     )
     .map(a => {
       const start = a.tijdslot.slice(0,5);
